@@ -6,7 +6,6 @@ import java.util.*;
 public class PlayingWithAlgo {
 
 	public static String helloWorld(String name) {
-		// TODO Auto-generated method stub
 		String message;
 		// message = name == "" ? "Hello World": "Hello "+name;
 		if (name == "")
@@ -64,7 +63,15 @@ public class PlayingWithAlgo {
 	}
 
 	public static String[] reverseOrderInArray(String array[]) {
-		return null;
+		String[] reverse = array;
+
+		for (int i = 0; i < array.length / 2; i++) {
+			String temp = array[i];
+			reverse[i] = array[array.length - i - 1];
+			reverse[array.length - i - 1] = temp;
+		}
+		return reverse;
+
 	}
 
 	public static String[][] everyPossiblePair(String array[]) {
@@ -72,7 +79,24 @@ public class PlayingWithAlgo {
 	}
 
 	public static List<String> sortByLastLetter(String array[]) {
-		return null;
+		ArrayList<String> resultat = new ArrayList<String>();
+		String[] temp = new String[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			StringBuilder buffer = new StringBuilder(array[i]);
+			String lettreInverse = buffer.reverse().toString();
+			temp[i] = lettreInverse;
+		}
+		Arrays.sort(temp);
+
+		for (int i = 0; i < array.length; i++) {
+			StringBuilder buffer = new StringBuilder(temp[i]);
+			String lettreInverse = buffer.reverse().toString();
+			resultat.add(lettreInverse);
+		}
+
+		return resultat;
+
 	}
 
 	public static String getFirstHalf(String string) {
@@ -86,7 +110,33 @@ public class PlayingWithAlgo {
 	}
 
 	public static String exportWordWithoutALetter(String array[], char letter) {
-		return null;
+		boolean test = true;
+		String retour = "Perdu !";
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == null && i < array.length - 1)
+				continue;
+				//i++;
+			else if (array[i] != null) {
+				array[i] = array[i].toLowerCase();
+				for (int j = 0; j < array[i].length(); j++) {
+					System.out.println(array[i].charAt(j));
+					if (letter == array[i].charAt(j)) {
+						test = false;
+						i++;
+						j = -1;
+						System.out.println(array[i] + test);
+
+					} else if (test && j == (array[i].length() - 1)) {
+						retour = array[i];
+						System.out.println(retour);
+						System.out.println(test);
+						return retour;
+					}
+				}
+			}
+		}
+		System.out.println(retour);
+		return retour;
 	}
 
 	public static int numberOfPalindromeWord(String text) {
@@ -140,7 +190,29 @@ public class PlayingWithAlgo {
 	}
 
 	public static String getAllLetters(String[] array) {
-		return null;
+		ArrayList<Character> liste = new ArrayList<Character>();
+		String lettre = Arrays.toString(array); // transforme le tableau d'entrée en String
+		lettre = lettre.replaceAll("[^a-zA-Z]", ""); // Regex qui exclu les espaces
+		char[] tabChar = lettre.toCharArray(); // fait un tableau de char
+		Arrays.sort(tabChar); // tri un tableau de char
+		String resultat = new String(tabChar); // String à partir du char[] trié
+
+		// boucle ajouter les lettres à la liste
+		for (int i = 0; i < resultat.length(); i++) {
+			liste.add(resultat.charAt(i));
+		}
+
+		// refait la liste sans doublon
+		Set<Character> listeSansDoublon = new TreeSet<Character>();
+		listeSansDoublon.addAll(liste);
+		List<Character> listeFinale = new ArrayList<Character>(listeSansDoublon);
+
+		// on refait le String final
+		String resultatFinal = new String();
+		for (char c : listeFinale) {
+			resultatFinal = resultatFinal + c;
+		}
+		return resultatFinal;
 	}
 
 	public static String removeCapitals(String text) {
@@ -421,6 +493,7 @@ public class PlayingWithAlgo {
 	}
 
 	public static int Addition(HashMap<String, Integer> addition) {
+		
 		return 0;
 	}
 
@@ -456,11 +529,19 @@ public class PlayingWithAlgo {
 	}
 
 	public static String swapFirstandLastLetter(String[] array) {
-		return null;
+		String resultat = array;
+
+		int taille = resultat.length() - 1;
+		char premier = resultat.charAt(0);
+		char dernier = resultat.charAt(taille);
+
+		resultat = resultat.replaceAll("(^.)", Character.toString(dernier));
+		resultat = resultat.replaceAll("(.$)", Character.toString(premier));
+
+		return resultat;
 	}
 
 	public static int[] swapFirstandLastElement(int[] array) {
-
 		return null;
 	}
 
